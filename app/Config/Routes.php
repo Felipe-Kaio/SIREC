@@ -74,7 +74,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/',                'Main::index');
-$routes->post('/submeter',       'Main::login');
+$routes->post('/submit',         'Main::submit');
 
 
 /**

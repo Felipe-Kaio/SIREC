@@ -5,37 +5,41 @@
         <div class="col">
 
             <?= form_open_multipart('/submit') ?>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="col">
+                    <label for="name" class="form-label">Name </label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="area" class="form-label">Área de Reclamação *</label>
+                    <select class="form-select" id="area" name="area" required>
+                        <option value="">Selecione uma área</option>
+                        <option value="1">Área 1</option>
+                        <option value="2">Área 2</option>
+                        <option value="3">Área 3</option>
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
-                <label for="name" class="form-label">Name </label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="complait" class="form-label">Área de texto para Reclamação *</label>
+                <textarea class="form-control" id="complaint" name="complaint" rows="6" required></textarea>
             </div>
 
             <div class="mb-3">
-                <label for="area" class="form-label">Área de Reclamação *</label>
-                <select class="form-select" id="area" name="area" required>
-                    <option value="">Selecione uma área</option>
-                    <option value="area1">área 1</option>
-                    <option value="area2">área 2</option>
-                    <option value="area3">área 3</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="reclamacao" class="form-label">Área de texto para Reclamação *</label>
-                <textarea class="form-control" id="reclamacao" name="reclamacao" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="arquivos" class="form-label">Upload de ficheiros</label>
+                <label for="files" class="form-label">Upload de ficheiros</label>
                 <div class="d-flex flex-row justify-content-between gap-3">
-                    <input class="form-control" type="file" id="arquivo1" name="arquivos[]">
-                    <input class="form-control" type="file" id="arquivo2" name="arquivos[]">
-                    <input class="form-control" type="file" id="arquivo3" name="arquivos[]">
+                    <input class="form-control" type="file" id="files1" name="files[]">
+                    <input class="form-control" type="file" id="files2" name="files[]">
+                    <input class="form-control" type="file" id="files3" name="files[]">
                 </div>
             </div>
 
