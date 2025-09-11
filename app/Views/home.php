@@ -4,12 +4,23 @@
     <div class="row">
         <div class="col">
 
-            <?= form_open_multipart('/submit') ?>
+            <?php if (!empty($validation_errors)) : ?>
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        <?php foreach ($validation_errors as $error) : ?>
+                            <li><?= $error ?></li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            <?= form_open_multipart('/submit', ['novalidate' => true]) ?>
             <div class="row mb-3">
                 <div class="col">
                     <label for="email" class="form-label">Email *</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required value="<?= old('email') ?>">
                 </div>
+                <?= show_validation_error('email', $validation_errors) ?>
 
                 <div class="col">
                     <label for="name" class="form-label">Name </label>
@@ -28,11 +39,13 @@
                     </select>
                 </div>
             </div>
+            <?= show_validation_error('area', $validation_errors) ?>
 
             <div class="mb-3">
                 <label for="complait" class="form-label">Área de texto para Reclamação *</label>
                 <textarea class="form-control" id="complaint" name="complaint" rows="6" required></textarea>
             </div>
+            <?= show_validation_error('complaint', $validation_errors) ?>
 
             <div class="mb-3">
                 <label for="files" class="form-label">Upload de ficheiros</label>
@@ -45,6 +58,7 @@
 
             <button type="submit" class="btn btn-primary">Enviar</button>
             <?= form_close() ?>
+
 
         </div>
     </div>
