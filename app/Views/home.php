@@ -24,7 +24,7 @@
 
                 <div class="col">
                     <label for="name" class="form-label">Name </label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" <?= old('') ?>>
                 </div>
             </div>
 
@@ -43,16 +43,29 @@
 
             <div class="mb-3">
                 <label for="complait" class="form-label">Área de texto para Reclamação *</label>
-                <textarea class="form-control" id="complaint" name="complaint" rows="6" required></textarea>
+                <textarea class="form-control" id="complaint" name="complaint" rows="6" required><?= old('complaint') ?></textarea>
             </div>
             <?= show_validation_error('complaint', $validation_errors) ?>
 
             <div class="mb-3">
                 <label for="files" class="form-label">Upload de ficheiros</label>
                 <div class="d-flex flex-row justify-content-between gap-3">
-                    <input class="form-control" type="file" id="files1" name="files[]">
-                    <input class="form-control" type="file" id="files2" name="files[]">
-                    <input class="form-control" type="file" id="files3" name="files[]">
+
+                    <div>
+                        <input class="form-control" type="file" id="file1" name="file1">
+                        <?= show_validation_error('file1', $validation_errors) ?>
+                    </div>
+
+                    <div>
+                        <input class="form-control" type="file" id="file2" name="file2">
+                        <?= show_validation_error('file2', $validation_errors) ?>
+                    </div>
+
+                    <div>
+                        <input class="form-control" type="file" id="file3" name="file3">
+                        <?= show_validation_error('file3', $validation_errors) ?>
+                    </div>
+
                 </div>
             </div>
 

@@ -42,24 +42,83 @@ class Main extends BaseController
                     'required' => 'O campo {field} é obrigatório.',
                     'max_length' => 'O campo {field} deve conter no máximo {param} caracteres.'
                 ]
-            ]
+            ],
+            'file1' => [
+                'label' => 'Ficheiro 1',
+                'rules' => 'permit_empty|max_size[file1,512]|ext_in[file1,png,jpg,gif,webp]',
+                'errors' => [
+                    'max_size' => 'O campo {field} deve conter no máximo {param}KB.',
+                    'ext_in' => 'O campo {field} deve ter o formato válido, dos tipos: {param}'
+                ]
+            ],
+            'file2' => [
+                'label' => 'Ficheiro 2',
+                'rules' => 'permit_empty|max_size[file2,512]|ext_in[file2,png,jpg,gif,webp]',
+                'errors' => [
+                    'max_size' => 'O campo {field} deve conter no máximo {param}KB.',
+                    'ext_in' => 'O campo {field} deve ter o formato válido, dos tipos: {param}'
+                ]
+            ],
+            'file3' => [
+                'label' => 'Ficheiro 3',
+                'rules' => 'permit_empty|max_size[file3,512]|ext_in[file3,png,jpg,gif,webp]',
+                'errors' => [
+                    'max_size' => 'O campo {field} deve conter no máximo {param}KB.',
+                    'ext_in' => 'O campo {field} deve ter o formato válido, dos tipos: {param}'
+                ]
+            ],
         ]);
 
         if (!$validation) {
             return redirect()->to(base_url('Main/index'))->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        die('OK');
+        // atachmentts files
+        $file1 = $this->request->getFile('file1');
+        $file2 = $this->request->getFile('file2');
+        $file3 = $this->request->getFile('file3');
 
-        echo '<pre>';
-        print_r($this->request->getPost());
-        print_r($this->request->getFiles());
+        $fileNames = [];
 
-        // dd(
-        //      [
-        //         $this->request->getPost(),
-        //         $this->request->getFiles()
-        //      ]
-        //  );
+        // File 1
+        if ($file1->isValid() && !$file1->hasMoved()) {
+            $newName = $file1->getRandomName();
+            $fileNames[] = [
+                'original' => $file1->getClientName(),
+                'new' => $newName
+            ];
+            $file1->move(WRITEPATH . 'uploads', $newName);
+        }
+
+        // File 2
+        if ($file2->isValid() && !$file2->hasMoved()) {
+            $newName = $file2->getRandomName();
+            $fileNames[] = [
+                'original' => $file2->getClientName(),
+                'new' => $newName
+            ];
+            $file2->move(WRITEPATH . 'uploads', $newName);
+        }
+
+        // File 3
+        if ($file3->isValid() && !$file3->hasMoved()) {
+            $newName = $file3->getRandomName();
+            $fileNames[] = [
+                'original' => $file3->getClientName(),
+                'new' => $newName
+            ];
+            $file3->move(WRITEPATH . 'uploads', $newName);
+        }
+
+        // get total info to store in database
+        $data = [
+            'email' => $this->request->getPost('email'),
+            'area' => $this->request->getPost('area'),
+            'complaint' => $this->request->getPost('complaint'),
+            'files' => json_encode($fileNames)
+        ];
+
+        // Store in database
+        
     }
 }
