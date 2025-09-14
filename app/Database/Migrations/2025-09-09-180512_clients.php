@@ -17,7 +17,7 @@ class Clientes extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '100',
 			],
-			'nome'       => [
+			'name'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '100',
 				'null' => true,
@@ -30,13 +30,13 @@ class Clientes extends Migration
 
 
 		$this->forge->addPrimaryKey('id');
-		$this->forge->createTable('clientes');
+		$this->forge->createTable('clients');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('clientes');
+		$this->forge->dropTable('clients');
 	}
 }

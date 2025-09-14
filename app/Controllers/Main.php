@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ClientModel;
+use App\Models\ComplaintModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Main extends BaseController
@@ -112,13 +114,31 @@ class Main extends BaseController
 
         // get total info to store in database
         $data = [
-            'email' => $this->request->getPost('email'),
-            'area' => $this->request->getPost('area'),
+            'email'     => $this->request->getPost('email'),
+            'name'      => $this->request->getPost('name'),
+            'area'      => $this->request->getPost('area'),
             'complaint' => $this->request->getPost('complaint'),
-            'files' => json_encode($fileNames)
+            'files'     => json_encode($fileNames)
         ];
 
         // Store in database
-        
+        $client_model = new ClientModel();
+        $complaint_model = new ComplaintModel();
+
+        // Check if the client already exists
+        $client = $client_model->where('email', $data['email'])->first();
+
+        if (!$client) {
+            $client_model->insert([
+                'email' => $data['email'],
+                'name' => $data['name'],
+                'created_at'=> date('Y-m-d H:i:s') 
+            ]);
+            $client_id = $client_model->getInsertID();
+        } else {
+            $client_id = $client->id;
+        }
+
+        echo $client_id;
     }
 }

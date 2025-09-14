@@ -13,12 +13,12 @@ class UsuarioReclamacao extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'usuario_id'       => [
+			'user_id'       => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
 			],
-			'reclamacao_id'       => [
+			'complaint_id'       => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
@@ -37,13 +37,13 @@ class UsuarioReclamacao extends Migration
 			],
 		]);
 		$this->forge->addPrimaryKey('id');
-		$this->forge->createTable('usuario_reclamacoes');
+		$this->forge->createTable('user_complaints');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('usuario_reclamacoes');
+		$this->forge->dropTable('user_complaints');
 	}
 }

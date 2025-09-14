@@ -1,8 +1,10 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Usuarios extends Migration
+class Reclamacoes extends Migration
 {
 	public function up()
 	{
@@ -13,21 +15,31 @@ class Usuarios extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'email'       => [
-				'type'       => 'VARCHAR',
-				'constraint' => '100',
+			'clients_id'       => [
+				'type'       => 'INT',
+				'constraint' => 11,
+				'unsigned'  => true,
 			],
-			'senha'       => [
+			'area'       => [
 				'type'       => 'VARCHAR',
-				'constraint' => '200',
+				'constraint' => '100'
 			],
-			'tipo'       => [
+			'menssage'       => [
+				'type'       => 'TEXT',
+				'constraint' => '3000'
+			],
+			'atachmentts'       => [
+				'type'       => 'VARCHAR',
+				'constraint' => '1000',
+				'null' => true,
+			],
+			'status'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '50',
-				'null' => true,
 			],
 			'created_at' => [
 				'type'    => 'DATETIME',
+				'null' => true,
 			],
 			'updated_at' => [
 				'type'    => 'DATETIME',
@@ -40,13 +52,13 @@ class Usuarios extends Migration
 			],
 		]);
 		$this->forge->addPrimaryKey('id');
-		$this->forge->createTable('usuarios');
+		$this->forge->createTable('complaints');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('usuarios');
+		$this->forge->dropTable('complaints');
 	}
 }

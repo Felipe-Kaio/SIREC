@@ -23,8 +23,8 @@
                 <?= show_validation_error('email', $validation_errors) ?>
 
                 <div class="col">
-                    <label for="name" class="form-label">Name </label>
-                    <input type="text" class="form-control" id="name" name="name" <?= old('') ?>>
+                    <label for="name" class="form-label">Nome </label>
+                    <input type="text" class="form-control" id="name" name="name" <?= old('name') ?>>
                 </div>
             </div>
 
