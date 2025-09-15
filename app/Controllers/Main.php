@@ -146,7 +146,7 @@ class Main extends BaseController
 
         // store complait in databases
         $complaint_model->insert([
-            'clients _id' => $client_id,
+            'clients_id' => $client_id,
             'area' => $data['area'],
             'message' => $data['complaint'],
             'attachments' => $data['files'],
