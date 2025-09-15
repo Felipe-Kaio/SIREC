@@ -13,7 +13,7 @@ class ComplaintModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectedFields  = false;
     protected $allowedFields    = [
-        'clients_id',
+        'client_id',
         'area',
         'message',
         'attachments',

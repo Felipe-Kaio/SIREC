@@ -78,7 +78,7 @@ $routes->get('/complaint',         'Main::complaint_frm');
 $routes->post('/submit',           'Main::submit');
 
 // route to check complaint status
-$routes->get('/check_complaint/(:alphanum)',  'Main::check_complaint');
+$routes->get('/check_complaint/(:alphanum)',  'Main::check_complaint/$1');
 
 
 /**

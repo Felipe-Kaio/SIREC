@@ -146,7 +146,7 @@ class Main extends BaseController
 
         // store complait in databases
         $complaint_model->insert([
-            'clients_id' => $client_id,
+            'client_id' => $client_id,
             'area' => $data['area'],
             'message' => $data['complaint'],
             'attachments' => $data['files'],
@@ -158,15 +158,15 @@ class Main extends BaseController
 
         // generate purl
         $purl = $this->_generatePurl($complaint_id);
-        echo $purl;
+
+        return view('emails/email1', ['purl' => $purl]);
     }
 
-    public function _generatePurl($complaint_id)
+    private function _generatePurl($complaint_id)
     {
 
         // create purl with codeigniter encryption
         $encriptar = \Config\Services::encrypter();
-        $id = 100;
         return site_url('/check_complaint/') . bin2hex($encriptar->encrypt($complaint_id));
     }
 
