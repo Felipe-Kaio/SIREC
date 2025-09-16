@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Migration;
 
-class UsuarioReclamacao extends Migration
+class user_complaints extends Migration
 {
 	public function up()
 	{

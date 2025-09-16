@@ -11,10 +11,15 @@ class Main extends BaseController
 {
     public function index()
     {
+        return view('home');
+    }
+
+    public function complaint_frm()
+    {
         // Check for validation errors
         $data['validation_errors'] = session()->getFlashdata('errors');
 
-        return view('home', $data);
+        return view('complaint_frm', $data);
     }
 
     public function submit()
@@ -132,13 +137,21 @@ class Main extends BaseController
             $client_model->insert([
                 'email' => $data['email'],
                 'name' => $data['name'],
-                'created_at'=> date('Y-m-d H:i:s') 
+                'created_at' => date('Y-m-d H:i:s')
             ]);
             $client_id = $client_model->getInsertID();
         } else {
             $client_id = $client->id;
         }
 
-        echo $client_id;
+        $complaint_model->insert([
+            'clients _id' => $client_id,
+            'area' => $data['area'],
+            'message' => $data['complaint'],
+            'attachments' => $data['files'],
+            'status' => 'analisando',
+        ]);
+
+        die('OK');
     }
 }

@@ -6,22 +6,29 @@ use CodeIgniter\Model;
 
 class ComplaintModel extends Model
 {
-    protected $table = 'complaint';
-    protected $primaryKey = 'id';
+    protected $table            = 'complaints';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType = 'object';
-    protected $useSoftDeletes = false;
-    protected $protectedFields = false;
-    protected $allowedFields = [];
+    protected $returnType       = 'object';
+    protected $useSoftDeletes   = false;
+    protected $protectedFields  = false;
+    protected $allowedFields    = [
+        'clients_id',
+        'area',
+        'message',
+        'attachments',
+        'status',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
 
     // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat = 'datetime';
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
-
-
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 }

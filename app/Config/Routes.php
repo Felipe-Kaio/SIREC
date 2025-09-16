@@ -74,12 +74,13 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/',                'Main::index');
+$routes->get('/complaint',       'Main::complaint_frm');
 $routes->post('/submit',         'Main::submit');
 
 
 /**
  * --------------------------------------------------------------------
- * Additional Routing
+ * Additional Routings
  * --------------------------------------------------------------------
  *
  * There will often be times that you need additional routing and you

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Reclamacoes extends Migration
+class complaints extends Migration
 {
 	public function up()
 	{
@@ -28,7 +28,7 @@ class Reclamacoes extends Migration
 				'type'       => 'TEXT',
 				'constraint' => '3000'
 			],
-			'atachmentts'       => [
+			'attachments'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '1000',
 				'null' => true,

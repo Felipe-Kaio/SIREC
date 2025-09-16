@@ -12,7 +12,11 @@ class ClientModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectedFields  = false;
-    protected $allowedFields    = ['name', 'email'];
+    protected $allowedFields    = [
+        'name',
+        'email',
+        'created_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
 
@@ -20,6 +24,4 @@ class ClientModel extends Model
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 }
