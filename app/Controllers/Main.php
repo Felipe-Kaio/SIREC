@@ -144,6 +144,7 @@ class Main extends BaseController
             $client_id = $client->id;
         }
 
+        // store complait in databases
         $complaint_model->insert([
             'clients _id' => $client_id,
             'area' => $data['area'],
@@ -152,6 +153,31 @@ class Main extends BaseController
             'status' => 'analisando',
         ]);
 
-        die('OK');
+        // get the last inserted id
+        $complaint_id = $complaint_model->getInsertID();
+
+        // generate purl
+        $purl = $this->_generatePurl($complaint_id);
+        echo $purl;
     }
+
+    public function _generatePurl($complaint_id)
+    {
+
+        // create purl with codeigniter encryption
+        $encriptar = \Config\Services::encrypter();
+        $id = 100;
+        return site_url('/check_complaint/') . bin2hex($encriptar->encrypt($complaint_id));
+    }
+
+    public function check_complaint($purl)
+    {
+        echo 'Bem-Vindo:<br>';
+        echo $purl;
+
+        $desencriptar = \Config\Services::encrypter();
+        $complaint_id = $desencriptar->decrypt(hex2bin($purl));
+        echo '<br>';
+        echo $complaint_id;
+    }   
 }

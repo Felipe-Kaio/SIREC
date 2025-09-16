@@ -73,9 +73,12 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/',                'Main::index');
-$routes->get('/complaint',       'Main::complaint_frm');
-$routes->post('/submit',         'Main::submit');
+$routes->get('/',                  'Main::index');
+$routes->get('/complaint',         'Main::complaint_frm');
+$routes->post('/submit',           'Main::submit');
+
+// route to check complaint status
+$routes->get('/check_complaint/(:alphanum)',  'Main::check_complaint');
 
 
 /**
