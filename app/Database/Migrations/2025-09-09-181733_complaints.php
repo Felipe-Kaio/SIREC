@@ -24,7 +24,7 @@ class complaints extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '100'
 			],
-			'menssage'       => [
+			'message'       => [
 				'type'       => 'TEXT',
 				'constraint' => '3000'
 			],

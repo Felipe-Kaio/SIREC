@@ -180,7 +180,7 @@ class Main extends BaseController
     }
 
     private function _generatePurl($complaint_id)
-    {
+    {   
 
         // create purl with codeigniter encryption
         $encriptar = \Config\Services::encrypter();
