@@ -160,15 +160,19 @@ class Main extends BaseController
         $purl = $this->_generatePurl($complaint_id);
 
         // send email
-        $email = \Config\Services::email();
-        $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
-        $email->setTo($data['email']);
-        $email->setSubject('Reclamação submetida com sucesso');
+        try {
 
-        $body = view('emails/email1', ['purl' => $purl]);
-        $email->setMessage($body);
-
-        $email->send();
+            $email = \Config\Services::email();
+            $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
+            $email->setTo($data['email']);
+            $email->setSubject('Reclamação submetida com sucesso');
+            $body = view('emails/email1', ['purl' => $purl]);
+            $email->setMessage($body);
+            $email->send();
+        } catch (\Exception $e) {
+            // show error view
+            $this->_show_error();
+        }
 
         //keep only name and email in $data
         $tmp = [
@@ -180,7 +184,7 @@ class Main extends BaseController
     }
 
     private function _generatePurl($complaint_id)
-    {   
+    {
 
         // create purl with codeigniter encryption
         $encriptar = \Config\Services::encrypter();
@@ -196,5 +200,11 @@ class Main extends BaseController
         $complaint_id = $desencriptar->decrypt(hex2bin($purl));
         echo '<br>';
         echo $complaint_id;
-    }   
+    }
+
+    public function _show_error()
+    {
+        echo view("error");
+        exit();
+    }
 }
