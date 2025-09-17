@@ -159,7 +159,24 @@ class Main extends BaseController
         // generate purl
         $purl = $this->_generatePurl($complaint_id);
 
-        return view('emails/email1', ['purl' => $purl]);
+        // send email
+        $email = \Config\Services::email();
+        $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
+        $email->setTo($data['email']);
+        $email->setSubject('Reclamação submetida com sucesso');
+
+        $body = view('emails/email1', ['purl' => $purl]);
+        $email->setMessage($body);
+
+        $email->send();
+
+        //keep only name and email in $data
+        $tmp = [
+            'name' => $data['name'],
+            'email' => $data['email']
+        ];
+
+        return view('complaint_sucess', $tmp);
     }
 
     private function _generatePurl($complaint_id)

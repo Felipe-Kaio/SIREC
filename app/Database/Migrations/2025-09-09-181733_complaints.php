@@ -15,7 +15,7 @@ class complaints extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'clients_id'       => [
+			'client_id'       => [
 				'type'       => 'INT',
 				'constraint' => 11,
 				'unsigned'  => true,
