@@ -187,7 +187,7 @@ class Main extends BaseController
 
     private function _send_email($purl, $data)
     {
-        
+
         try {
             $email = \Config\Services::email();
             $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
