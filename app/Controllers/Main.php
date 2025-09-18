@@ -160,23 +160,10 @@ class Main extends BaseController
         $purl = $this->_generatePurl($complaint_id);
 
         // send email
-        $email = \Config\Services::email();
-        $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
-        $email->setTo($data['email']);
-        $email->setSubject('Reclamação submetida com sucesso');
+        $this->_send_email($purl, $data);
 
-        $body = view('emails/email1', ['purl' => $purl]);
-        $email->setMessage($body);
-
-        $email->send();
-
-        //keep only name and email in $data
-        $tmp = [
-            'name' => $data['name'],
-            'email' => $data['email']
-        ];
-
-        return view('complaint_sucess', $tmp);
+        // show sucess view
+        return $this->_show_sucess($data);
     }
 
     private function _generatePurl($complaint_id)
@@ -196,5 +183,38 @@ class Main extends BaseController
         $complaint_id = $desencriptar->decrypt(hex2bin($purl));
         echo '<br>';
         echo $complaint_id;
-    }   
+    }
+
+    private function _send_email($purl, $data)
+    {
+        
+        try {
+            $email = \Config\Services::email();
+            $email->setFrom('felipekaiobarr@gmail.com', 'Felipe');
+            $email->setTo($data['email']);
+            $email->setSubject('Reclamação submetida com sucesso');
+            $body = view('emails/email1', ['purl' => $purl]);
+            $email->setMessage($body);
+            $email->send();
+        } catch (\Exception $e) {
+            // show error view
+            $this->_show_error();
+        }
+    }
+
+    private function _show_sucess($data)
+    {
+        $tmp = [
+            'name' => $data['name'],
+            'email' => $data['email']
+        ];
+
+        return view('complaint_sucess', $tmp);
+    }
+
+    private function _show_error()
+    {
+        echo view("error");
+        exit();
+    }
 }
